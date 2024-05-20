@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AppConfig from "@/components/app-config";
+import AppConfig from "@/components/config/app-config";
 
 export const metadata: Metadata = {
   title: "To-Do List (v2)",
