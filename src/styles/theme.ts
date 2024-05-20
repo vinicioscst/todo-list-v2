@@ -22,19 +22,7 @@ const theme = createTheme({
     },
   },
   palette: {
-    primary: {
-      "900": "#0d0714",
-      "800": "#15101c",
-      "700": "#1d1825",
-    },
-    secondary: {
-      main: "#78cfb0",
-      "500": "#9e78cf",
-      "300": "#ab89d6",
-    },
-    text: {
-      primary: "#777777",
-    },
+    mode: "dark",
   },
 });
 

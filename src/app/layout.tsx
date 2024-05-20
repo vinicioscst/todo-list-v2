@@ -1,8 +1,5 @@
-import theme from "@/styles/theme";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import type { Metadata } from "next";
+import AppConfig from "@/components/app-config";
 
 export const metadata: Metadata = {
   title: "To-Do List (v2)",
@@ -17,10 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AppRouterCacheProvider>
-          <CssBaseline />
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
-        </AppRouterCacheProvider>
+        <AppConfig>{children}</AppConfig>
       </body>
     </html>
   );
