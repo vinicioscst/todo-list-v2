@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import AppConfig from "@/components/config/app-config";
+import TasksProvider from "@/context/tasks-context";
 
 export const metadata: Metadata = {
   title: "To-Do List (v2)",
@@ -14,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AppConfig>{children}</AppConfig>
+        <AppConfig>
+          <TasksProvider>{children}</TasksProvider>
+        </AppConfig>
       </body>
     </html>
   );
