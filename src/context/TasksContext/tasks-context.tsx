@@ -39,7 +39,12 @@ function TasksProvider({ children }: ITasksProvider) {
       setTasksDeleted(storedTasksDeleted);
   }, []);
 
-  const { handleSubmit, register, reset } = useForm<TCreateTask>({
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm<TCreateTask>({
     resolver: zodResolver(handleTask),
   });
 
@@ -67,6 +72,7 @@ function TasksProvider({ children }: ITasksProvider) {
         handleCreateTask,
         handleSubmit,
         register,
+        errors,
       }}
     >
       {children}
