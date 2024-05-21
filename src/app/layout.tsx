@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import AppConfig from "@/components/config/app-config";
-import TasksProvider from "@/context/tasks-context";
+import TasksProvider from "@/context/TasksContext/tasks-context";
+import ToastProvider from "@/context/ToastContext/toast.context";
+import Toast from "@/components/toast";
 
 export const metadata: Metadata = {
   title: "To-Do List (v2)",
@@ -16,7 +18,12 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <AppConfig>
-          <TasksProvider>{children}</TasksProvider>
+          <ToastProvider>
+            <TasksProvider>
+              {children}
+              <Toast />
+            </TasksProvider>
+          </ToastProvider>
         </AppConfig>
       </body>
     </html>
