@@ -2,7 +2,7 @@
 import { Box, IconButton, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useContext } from "react";
-import { TasksContext } from "@/context/tasks-context";
+import { TasksContext } from "@/context/TasksContext/tasks-context";
 
 function CreateTaskForm() {
   const { register, handleSubmit, handleCreateTask } = useContext(TasksContext);
