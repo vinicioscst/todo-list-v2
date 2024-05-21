@@ -1,4 +1,8 @@
-import { UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
+import {
+  FieldErrors,
+  UseFormHandleSubmit,
+  UseFormRegister,
+} from "react-hook-form";
 import { z } from "zod";
 
 export interface ITasksContext {
@@ -10,6 +14,9 @@ export interface ITasksContext {
     undefined
   >;
   register: UseFormRegister<{
+    name: string;
+  }>;
+  errors: FieldErrors<{
     name: string;
   }>;
 }

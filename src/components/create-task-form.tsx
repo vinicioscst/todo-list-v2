@@ -3,18 +3,32 @@ import { Box, IconButton, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useContext } from "react";
 import { TasksContext } from "@/context/TasksContext/tasks-context";
+import theme from "@/styles/theme";
 
 function CreateTaskForm() {
-  const { register, handleSubmit, handleCreateTask } = useContext(TasksContext);
+  const { register, handleSubmit, handleCreateTask, errors } =
+    useContext(TasksContext);
 
   return (
-    <Box component="form" onSubmit={handleSubmit(handleCreateTask)}>
+    <Box
+      component="form"
+      onSubmit={handleSubmit(handleCreateTask)}
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        gap: "8px",
+        width: "100%",
+      }}
+    >
       <TextField
-        label="Write a task"
-        variant="standard"
+        label={errors.name ? errors.name?.message : "Write a task"}
+        variant="filled"
         {...register("name")}
+        error={!!errors.name}
+        sx={{ width: "100%" }}
+        color="secondary"
       />
-      <IconButton aria-label="add" type="submit">
+      <IconButton aria-label="add" type="submit" color="secondary">
         <AddIcon />
       </IconButton>
     </Box>
