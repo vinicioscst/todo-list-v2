@@ -19,6 +19,9 @@ export interface ITasksContext {
   errors: FieldErrors<{
     name: string;
   }>;
+  tasksToDo: [] | ITask[];
+  tasksDone: [] | ITask[];
+  tasksDeleted: [] | ITask[];
 }
 
 export interface ITasksProvider {
