@@ -21,11 +21,17 @@ function TasksListSection({ listType }: ITaskListSection) {
         gap="0.5rem"
       >
         {listType === "to-do" &&
-          tasksToDo.map((task) => <TaskCard key={task.id} task={task} />)}
+          tasksToDo.map((task) => (
+            <TaskCard key={task.id} task={task} listType={listType} />
+          ))}
         {listType === "done" &&
-          tasksDone.map((task) => <TaskCard key={task.id} task={task} />)}
+          tasksDone.map((task) => (
+            <TaskCard key={task.id} task={task} listType={listType} />
+          ))}
         {listType === "deleted" &&
-          tasksDeleted.map((task) => <TaskCard key={task.id} task={task} />)}
+          tasksDeleted.map((task) => (
+            <TaskCard key={task.id} task={task} listType={listType} />
+          ))}
       </Box>
     </Box>
   );

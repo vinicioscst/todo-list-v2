@@ -56,14 +56,82 @@ function TasksProvider({ children }: ITasksProvider) {
     };
 
     const newListToDo = [...tasksToDo, newTask];
+
     setTasksToDo(newListToDo);
+
     localStorage.setItem("TODOLIST@TASKSTODO", JSON.stringify(newListToDo));
     handleToast({
       message: "New task created",
       severity: "success",
       variant: "filled",
     });
+
     reset();
+  }
+
+  function handleTaskDone(task: ITask) {
+    const listWithoutTask: ITask[] = tasksToDo.filter(
+      (prevTask) => prevTask.id !== task.id
+    );
+    setTasksToDo(listWithoutTask);
+    localStorage.setItem("TODOLIST@TASKSTODO", JSON.stringify(listWithoutTask));
+
+    const newListDone = [...tasksDone, task];
+    setTasksDone(newListDone);
+    localStorage.setItem("TODOLIST@TASKSDONE", JSON.stringify(newListDone));
+
+    handleToast({
+      message: "Task marked as done",
+      severity: "success",
+      variant: "filled",
+    });
+
+    reset();
+  }
+
+  function handleEditTask(data: TCreateTask, taskId: string) {
+    const listWithEditedTask: ITask[] = tasksToDo.map((task) => {
+      if (task.id === taskId) {
+        return { ...task, name: data.name };
+      }
+      return task;
+    });
+    setTasksToDo(listWithEditedTask);
+
+    localStorage.setItem(
+      "TODOLIST@TASKSTODO",
+      JSON.stringify(listWithEditedTask)
+    );
+
+    handleToast({
+      message: "Task edited with success",
+      severity: "success",
+      variant: "filled",
+    });
+
+    reset();
+  }
+
+  function handleDeleteTask(taskId: string) {
+    const deletedTask: ITask[] = tasksToDo.filter((task) => task.id === taskId);
+    const newListDeleted = [...tasksDeleted, deletedTask[0]];
+    setTasksDeleted(newListDeleted);
+    localStorage.setItem(
+      "TODOLIST@TASKSDELETED",
+      JSON.stringify(newListDeleted)
+    );
+
+    const listWithoutTask: ITask[] = tasksToDo.filter(
+      (task) => task.id !== taskId
+    );
+    setTasksToDo(listWithoutTask);
+    localStorage.setItem("TODOLIST@TASKSTODO", JSON.stringify(listWithoutTask));
+
+    handleToast({
+      message: "Task deleted with success",
+      severity: "success",
+      variant: "filled",
+    });
   }
 
   return (
@@ -76,6 +144,9 @@ function TasksProvider({ children }: ITasksProvider) {
         tasksToDo,
         tasksDone,
         tasksDeleted,
+        handleTaskDone,
+        handleEditTask,
+        handleDeleteTask,
       }}
     >
       {children}
