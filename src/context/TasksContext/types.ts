@@ -22,6 +22,9 @@ export interface ITasksContext {
   tasksToDo: [] | ITask[];
   tasksDone: [] | ITask[];
   tasksDeleted: [] | ITask[];
+  handleTaskDone(task: ITask): void;
+  handleEditTask(data: TCreateTask, taskId: string): void;
+  handleDeleteTask(taskId: string): void;
 }
 
 export interface ITasksProvider {
