@@ -50,7 +50,7 @@ function TaskCard({ task, listType }: ITaskCard) {
           })}
         </Typography>
       </Box>
-      {listType === "to-do" && !deleteMode ? (
+      {listType === "to-do" && !deleteMode && (
         <Box>
           <IconButton
             aria-label="mark task as done"
@@ -77,7 +77,8 @@ function TaskCard({ task, listType }: ITaskCard) {
             <Delete />
           </IconButton>
         </Box>
-      ) : (
+      )}
+      {listType === "to-do" && deleteMode && (
         <Box>
           <IconButton
             aria-label="edit complete"
