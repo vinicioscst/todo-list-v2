@@ -73,6 +73,9 @@ function TasksProvider({ children }: ITasksProvider) {
         handleSubmit,
         register,
         errors,
+        tasksToDo,
+        tasksDone,
+        tasksDeleted,
       }}
     >
       {children}
