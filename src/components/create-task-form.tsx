@@ -18,17 +18,18 @@ function CreateTaskForm() {
         alignItems: "center",
         gap: "8px",
         width: "100%",
+        paddingTop: "2rem",
       }}
     >
       <TextField
         label={errors.name ? errors.name?.message : "Write a task"}
-        variant="filled"
+        variant="outlined"
         {...register("name")}
         error={!!errors.name}
         sx={{ width: "100%" }}
         color="secondary"
       />
-      <IconButton aria-label="add" type="submit" color="secondary">
+      <IconButton aria-label="add" type="submit" color="secondary" size="large">
         <AddIcon />
       </IconButton>
     </Box>

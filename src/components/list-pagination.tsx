@@ -23,8 +23,10 @@ function ListPagination() {
     <Pagination
       count={Math.ceil(currentList.length / Number(listSize))}
       color="secondary"
+      page={page}
       defaultPage={page}
       onChange={handleChange}
+      sx={{ margin: "0 auto", paddingX: "1rem" }}
     />
   );
 }

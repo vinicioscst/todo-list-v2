@@ -1,13 +1,5 @@
-import CreateTaskForm from "@/components/create-task-form";
-import Nav from "@/components/nav";
-import TasksListSection from "@/components/tasks-list-section";
-import { Box } from "@mui/material";
+import PageSection from "@/components/page-section";
 
 export default function Home() {
-  return (
-    <Box component="main" width="100%" maxWidth="36.5rem" marginY="5rem">
-      <CreateTaskForm />
-      <TasksListSection listType="to-do" />
-    </Box>
-  );
+  return <PageSection listType="to-do" sectionName="Tasks to-do" />;
 }

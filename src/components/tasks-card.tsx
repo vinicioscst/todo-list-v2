@@ -6,6 +6,7 @@ import { Box, Card, IconButton, TextField, Typography } from "@mui/material";
 import { formatDistance } from "date-fns";
 import { useContext, useState } from "react";
 import Modal from "./modal";
+import theme from "@/styles/theme";
 
 interface ITaskCard {
   task: ITask;
@@ -30,30 +31,47 @@ function TaskCard({ task, listType }: ITaskCard) {
   }
 
   return (
-    <Card>
+    <Card
+      sx={{
+        boxShadow: "0 0",
+        bgcolor: theme.palette.grey[900],
+        padding: "0.5rem",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        gap: "2rem",
+      }}
+    >
       <Box>
         {deleteMode ? (
           <Box
             component="form"
             id="edit-form"
             onSubmit={handleSubmitEdit(submitEdit)}
+            sx={{ width: "100%" }}
           >
             <TextField
               label={errorsEdit.name ? errorsEdit.name?.message : "Edit task"}
-              variant="filled"
+              variant="outlined"
               {...registerEdit("name")}
               error={!!errorsEdit.name}
+              size="small"
+              color="secondary"
             />
           </Box>
         ) : (
-          <Typography>{task.name}</Typography>
+          <Typography variant="h6" color={theme.palette.secondary.light}>
+            {task.name}
+          </Typography>
         )}
-        <Typography>
-          {formatDistance(task.createdAt, new Date(), {
-            includeSeconds: true,
-            addSuffix: true,
-          })}
-        </Typography>
+        {listType === "to-do" && !deleteMode && (
+          <Typography variant="subtitle1">
+            {formatDistance(task.createdAt, new Date(), {
+              includeSeconds: true,
+              addSuffix: true,
+            })}
+          </Typography>
+        )}
       </Box>
       {listType === "to-do" && !deleteMode && (
         <Box>
