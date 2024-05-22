@@ -48,6 +48,15 @@ function TasksProvider({ children }: ITasksProvider) {
     resolver: zodResolver(handleTask),
   });
 
+  const {
+    handleSubmit: handleSubmitEdit,
+    register: registerEdit,
+    reset: resetEdit,
+    formState: { errors: errorsEdit },
+  } = useForm<TCreateTask>({
+    resolver: zodResolver(handleTask),
+  });
+
   function handleCreateTask(data: TCreateTask) {
     const newTask: ITask = {
       id: crypto.randomUUID(),
@@ -109,7 +118,7 @@ function TasksProvider({ children }: ITasksProvider) {
       variant: "filled",
     });
 
-    reset();
+    resetEdit();
   }
 
   function handleDeleteTask(taskId: string) {
@@ -139,8 +148,11 @@ function TasksProvider({ children }: ITasksProvider) {
       value={{
         handleCreateTask,
         handleSubmit,
+        handleSubmitEdit,
         register,
+        registerEdit,
         errors,
+        errorsEdit,
         tasksToDo,
         tasksDone,
         tasksDeleted,

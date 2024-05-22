@@ -1,18 +1,29 @@
-"use client";
-import { TasksContext } from "@/context/TasksContext/tasks-context";
 import { Box } from "@mui/material";
-import { useContext } from "react";
+import ListOrderByFilter from "./list-orderby-filter";
+import ListSizeFilter from "./list-size-filter";
 import TaskCard from "./tasks-card";
+import { ITask } from "@/context/TasksContext/types";
+import ListPagination from "./list-pagination";
 
-interface ITaskListSection {
+interface ITasksList {
+  list: ITask[];
   listType: "to-do" | "done" | "deleted";
 }
 
-function TasksListSection({ listType }: ITaskListSection) {
-  const { tasksToDo, tasksDone, tasksDeleted } = useContext(TasksContext);
-
+function TasksList({ list, listType }: ITasksList) {
   return (
-    <Box component="section">
+    <>
+      <Box
+        width="100%"
+        display="flex"
+        alignItems="center"
+        gap="1rem"
+        paddingY="2rem"
+      >
+        <ListOrderByFilter />
+        <ListSizeFilter />
+      </Box>
+
       <Box
         component="ul"
         padding="0"
@@ -20,21 +31,14 @@ function TasksListSection({ listType }: ITaskListSection) {
         flexDirection="column"
         gap="0.5rem"
       >
-        {listType === "to-do" &&
-          tasksToDo.map((task) => (
-            <TaskCard key={task.id} task={task} listType={listType} />
-          ))}
-        {listType === "done" &&
-          tasksDone.map((task) => (
-            <TaskCard key={task.id} task={task} listType={listType} />
-          ))}
-        {listType === "deleted" &&
-          tasksDeleted.map((task) => (
-            <TaskCard key={task.id} task={task} listType={listType} />
-          ))}
+        {list.map((task) => (
+          <TaskCard key={task.id} task={task} listType={listType} />
+        ))}
       </Box>
-    </Box>
+
+      <ListPagination />
+    </>
   );
 }
 
-export default TasksListSection;
+export default TasksList;

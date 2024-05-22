@@ -1,4 +1,4 @@
-import TasksListSection from "@/components/tasks-list";
+import TasksListSection from "@/components/tasks-list-section";
 
 function TasksDone() {
   return (

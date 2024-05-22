@@ -1,4 +1,4 @@
-"use state";
+"use client";
 import { TasksContext } from "@/context/TasksContext/tasks-context";
 import { ITask, TCreateTask } from "@/context/TasksContext/types";
 import { Close, Delete, Done, Edit } from "@mui/icons-material";
@@ -16,8 +16,13 @@ function TaskCard({ task, listType }: ITaskCard) {
   const [deleteMode, setDeleteMode] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { errors, register, handleSubmit, handleTaskDone, handleEditTask } =
-    useContext(TasksContext);
+  const {
+    errorsEdit,
+    registerEdit,
+    handleSubmitEdit,
+    handleTaskDone,
+    handleEditTask,
+  } = useContext(TasksContext);
 
   function submitEdit(data: TCreateTask) {
     handleEditTask(data, task.id);
@@ -31,13 +36,13 @@ function TaskCard({ task, listType }: ITaskCard) {
           <Box
             component="form"
             id="edit-form"
-            onSubmit={handleSubmit(submitEdit)}
+            onSubmit={handleSubmitEdit(submitEdit)}
           >
             <TextField
-              label={errors.name ? errors.name?.message : "Edit task"}
+              label={errorsEdit.name ? errorsEdit.name?.message : "Edit task"}
               variant="filled"
-              {...register("name")}
-              error={!!errors.name}
+              {...registerEdit("name")}
+              error={!!errorsEdit.name}
             />
           </Box>
         ) : (
