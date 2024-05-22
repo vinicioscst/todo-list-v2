@@ -4,10 +4,11 @@ import { Pagination } from "@mui/material";
 import { useContext, useEffect } from "react";
 
 function ListPagination() {
-  const { currentList, listSize, paginateList } = useContext(PaginationContext);
+  const { currentList, listSize, setPage, page } =
+    useContext(PaginationContext);
 
   useEffect(() => {
-    paginateList(1);
+    setPage(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -15,14 +16,14 @@ function ListPagination() {
     event: React.ChangeEvent<unknown> | null,
     value: number
   ) {
-    paginateList(value);
+    setPage(value);
   }
 
   return (
     <Pagination
       count={Math.ceil(currentList.length / Number(listSize))}
       color="secondary"
-      defaultPage={1}
+      defaultPage={page}
       onChange={handleChange}
     />
   );
