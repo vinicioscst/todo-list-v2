@@ -1,5 +1,4 @@
 "use client";
-import { TasksContext } from "@/context/TasksContext/tasks-context";
 import {
   Button,
   Dialog,
@@ -8,25 +7,22 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import { useContext } from "react";
 
 interface IModal {
   isModalOpen: boolean;
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  taskId: string;
+  title: string;
+  content: string;
+  handleDelete: () => void;
+  handleClose: () => void;
 }
 
-function Modal({ isModalOpen, setIsModalOpen, taskId }: IModal) {
-  const { handleDeleteTask } = useContext(TasksContext);
-
-  function handleClose() {
-    setIsModalOpen(false);
-  }
-
-  function handleDelete() {
-    handleDeleteTask(taskId);
-  }
-
+function Modal({
+  isModalOpen,
+  title,
+  content,
+  handleDelete,
+  handleClose,
+}: IModal) {
   return (
     <Dialog
       open={isModalOpen}
@@ -34,20 +30,18 @@ function Modal({ isModalOpen, setIsModalOpen, taskId }: IModal) {
       aria-labelledby="confirmation-dialog-title"
       aria-describedby="confirmation-dialog-description"
     >
-      <DialogTitle id="confirmation-dialog-title">
-        Do you want to delete this task?
-      </DialogTitle>
+      <DialogTitle id="confirmation-dialog-title">{title}</DialogTitle>
       <DialogContent>
         <DialogContentText id="confirmation-dialog-description">
-          {"This action can't be undone"}
+          {content}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button color="secondary" onClick={handleClose}>
-          Disagree
+          Cancel
         </Button>
         <Button color="secondary" onClick={handleDelete} autoFocus>
-          Agree
+          Confirm
         </Button>
       </DialogActions>
     </Dialog>

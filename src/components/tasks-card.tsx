@@ -23,7 +23,16 @@ function TaskCard({ task, listType }: ITaskCard) {
     handleSubmitEdit,
     handleTaskDone,
     handleEditTask,
+    handleDeleteTask,
   } = useContext(TasksContext);
+
+  function handleModalClose() {
+    setIsModalOpen(false);
+  }
+
+  function handleModalDelete() {
+    handleDeleteTask(task.id);
+  }
 
   function submitEdit(data: TCreateTask) {
     handleEditTask(data, task.id);
@@ -123,8 +132,10 @@ function TaskCard({ task, listType }: ITaskCard) {
       )}
       <Modal
         isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        taskId={task.id}
+        title="Do you want to delete this task?"
+        content="This action can't be undone"
+        handleClose={handleModalClose}
+        handleDelete={handleModalDelete}
       />
     </Card>
   );

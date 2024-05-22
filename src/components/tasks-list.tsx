@@ -4,6 +4,7 @@ import ListSizeFilter from "./list-size-filter";
 import TaskCard from "./tasks-card";
 import { ITask } from "@/context/TasksContext/types";
 import ListPagination from "./list-pagination";
+import ClearListButton from "./clear-list-button";
 
 interface ITasksList {
   list: ITask[];
@@ -16,6 +17,7 @@ function TasksList({ list, listType }: ITasksList) {
       <Box width="100%" display="flex" alignItems="center" gap="1rem">
         <ListOrderByFilter />
         <ListSizeFilter />
+        <ClearListButton listType={listType} />
       </Box>
       <Divider />
       <Box
