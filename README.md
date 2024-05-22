@@ -12,5 +12,6 @@ Organize your life with a simple and ad free to-do list.
 ## Features
 
 - Separate tasks pages - 'to do', 'done' and 'deleted'
+- Lists with pagination and ordering
 - **Always available**: tasks are automatically saved to your browser's local storage
 - Using Next.js and MUI
