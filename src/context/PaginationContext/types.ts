@@ -5,18 +5,13 @@ export interface IPaginationProvider {
 }
 
 export interface IPaginationContext {
-  currentList: [] | ITask[];
+  currentList: ITask[];
+  paginatedList: ITask[];
   setCurrentList: React.Dispatch<React.SetStateAction<[] | ITask[]>>;
   setOrderBy: React.Dispatch<React.SetStateAction<IOrderBy>>;
   orderBy: IOrderBy;
   setListSize: React.Dispatch<React.SetStateAction<IListSize>>;
   listSize: IListSize;
-  currentListOrderedByOldest: ITask[];
-  currentListOrderedByLatest: ITask[];
-  currentListOrderedFromAToZ: ITask[];
-  currentListOrderedFromZToA: ITask[];
-  currentListOrderedByLongerTask: ITask[];
-  currentListOrderedByShortestTask: ITask[];
   setPage: React.Dispatch<React.SetStateAction<number>>;
   page: number;
 }
