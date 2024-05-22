@@ -13,7 +13,7 @@ export const PaginationContext = createContext({} as IPaginationContext);
 function PaginationProvider({ children }: IPaginationProvider) {
   const [currentList, setCurrentList] = useState<ITask[]>([]);
   const [orderBy, setOrderBy] = useState<IOrderBy>("Latest");
-  const [listSize, setListSize] = useState<IListSize>("10");
+  const [listSize, setListSize] = useState<IListSize>("5");
   const [paginatedList, setPaginatedList] = useState<ITask[]>([]);
   const [page, setPage] = useState(1);
 
