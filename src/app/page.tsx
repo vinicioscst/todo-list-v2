@@ -1,6 +1,6 @@
 import CreateTaskForm from "@/components/create-task-form";
 import Nav from "@/components/nav";
-import TasksListSection from "@/components/tasks-list";
+import TasksListSection from "@/components/tasks-list-section";
 import { Box } from "@mui/material";
 
 export default function Home() {

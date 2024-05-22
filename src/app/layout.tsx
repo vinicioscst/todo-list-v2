@@ -4,6 +4,7 @@ import TasksProvider from "@/context/TasksContext/tasks-context";
 import ToastProvider from "@/context/ToastContext/toast.context";
 import Toast from "@/components/toast";
 import Nav from "@/components/nav";
+import PaginationProvider from "@/context/PaginationContext/pagination-context";
 
 export const metadata: Metadata = {
   title: "To-Do List (v2)",
@@ -21,9 +22,11 @@ export default function RootLayout({
         <AppConfig>
           <ToastProvider>
             <TasksProvider>
-              <Nav />
-              {children}
-              <Toast />
+              <PaginationProvider>
+                <Nav />
+                {children}
+                <Toast />
+              </PaginationProvider>
             </TasksProvider>
           </ToastProvider>
         </AppConfig>

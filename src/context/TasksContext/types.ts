@@ -19,6 +19,18 @@ export interface ITasksContext {
   errors: FieldErrors<{
     name: string;
   }>;
+  handleSubmitEdit: UseFormHandleSubmit<
+    {
+      name: string;
+    },
+    undefined
+  >;
+  registerEdit: UseFormRegister<{
+    name: string;
+  }>;
+  errorsEdit: FieldErrors<{
+    name: string;
+  }>;
   tasksToDo: [] | ITask[];
   tasksDone: [] | ITask[];
   tasksDeleted: [] | ITask[];
