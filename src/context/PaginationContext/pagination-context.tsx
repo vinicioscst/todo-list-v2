@@ -18,17 +18,37 @@ function PaginationProvider({ children }: IPaginationProvider) {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
+    function getOrderedList(orderBy: IOrderBy, list: ITask[]) {
+      switch (orderBy) {
+        case "Oldest":
+          return list;
+        case "Latest":
+          return list.slice().reverse();
+        case "A-Z":
+          return list.slice().sort((a, b) => a.name.localeCompare(b.name));
+        case "Z-A":
+          return list.slice().sort((a, b) => b.name.localeCompare(a.name));
+        case "Longer":
+          return list.slice().sort((a, b) => b.name.length - a.name.length);
+        case "Shorter":
+          return list.slice().sort((a, b) => a.name.length - b.name.length);
+        default:
+          return list;
+      }
+    }
+
     function paginateList() {
+      const orderedList = getOrderedList(orderBy, currentList);
       const startIndex = (page - 1) * Number(listSize);
       const endIndex = startIndex + Number(listSize);
 
-      const paginatedList = currentList.slice(startIndex, endIndex);
+      const paginatedList = orderedList.slice(startIndex, endIndex);
 
       setPaginatedList(paginatedList);
     }
 
     paginateList();
-  }, [page, listSize, currentList]);
+  }, [page, listSize, currentList, orderBy]);
 
   useEffect(() => {
     const storedOrderBy = localStorage.getItem("TODOLIST@ORDERBY");
@@ -40,36 +60,16 @@ function PaginationProvider({ children }: IPaginationProvider) {
       setListSize(storedListSize as IListSize);
   }, []);
 
-  const currentListOrderedByOldest = paginatedList;
-  const currentListOrderedByLatest = paginatedList.toReversed();
-  const currentListOrderedFromAToZ = paginatedList.toSorted((a, b) =>
-    a.name.localeCompare(b.name)
-  );
-  const currentListOrderedFromZToA = paginatedList.toSorted((a, b) =>
-    b.name.localeCompare(a.name)
-  );
-  const currentListOrderedByLongerTask = paginatedList.toSorted(
-    (a, b) => a.name.length - b.name.length
-  );
-  const currentListOrderedByShortestTask = paginatedList.toSorted(
-    (a, b) => b.name.length - a.name.length
-  );
-
   return (
     <PaginationContext.Provider
       value={{
         currentList,
+        paginatedList,
         setCurrentList,
         setOrderBy,
         orderBy,
         listSize,
         setListSize,
-        currentListOrderedByOldest,
-        currentListOrderedByLatest,
-        currentListOrderedFromAToZ,
-        currentListOrderedFromZToA,
-        currentListOrderedByLongerTask,
-        currentListOrderedByShortestTask,
         page,
         setPage,
       }}
