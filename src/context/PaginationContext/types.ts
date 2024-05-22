@@ -7,7 +7,6 @@ export interface IPaginationProvider {
 export interface IPaginationContext {
   currentList: [] | ITask[];
   setCurrentList: React.Dispatch<React.SetStateAction<[] | ITask[]>>;
-  paginateList(pageNumber: number): void;
   setOrderBy: React.Dispatch<React.SetStateAction<IOrderBy>>;
   orderBy: IOrderBy;
   setListSize: React.Dispatch<React.SetStateAction<IListSize>>;
@@ -18,6 +17,8 @@ export interface IPaginationContext {
   currentListOrderedFromZToA: ITask[];
   currentListOrderedByLongerTask: ITask[];
   currentListOrderedByShortestTask: ITask[];
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  page: number;
 }
 
 export type IOrderBy =

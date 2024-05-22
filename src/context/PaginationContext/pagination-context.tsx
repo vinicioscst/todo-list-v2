@@ -15,6 +15,20 @@ function PaginationProvider({ children }: IPaginationProvider) {
   const [orderBy, setOrderBy] = useState<IOrderBy>("Latest");
   const [listSize, setListSize] = useState<IListSize>("10");
   const [paginatedList, setPaginatedList] = useState<ITask[]>([]);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    function paginateList() {
+      const startIndex = (page - 1) * Number(listSize);
+      const endIndex = startIndex + Number(listSize);
+
+      const paginatedList = currentList.slice(startIndex, endIndex);
+
+      setPaginatedList(paginatedList);
+    }
+
+    paginateList();
+  }, [page, listSize, currentList]);
 
   useEffect(() => {
     const storedOrderBy = localStorage.getItem("TODOLIST@ORDERBY");
@@ -41,21 +55,11 @@ function PaginationProvider({ children }: IPaginationProvider) {
     (a, b) => b.name.length - a.name.length
   );
 
-  function paginateList(pageNumber: number) {
-    const startIndex = (pageNumber - 1) * Number(listSize);
-    const endIndex = startIndex + Number(listSize);
-
-    const paginatedList = currentList.slice(startIndex, endIndex);
-
-    setPaginatedList(paginatedList);
-  }
-
   return (
     <PaginationContext.Provider
       value={{
         currentList,
         setCurrentList,
-        paginateList,
         setOrderBy,
         orderBy,
         listSize,
@@ -66,6 +70,8 @@ function PaginationProvider({ children }: IPaginationProvider) {
         currentListOrderedFromZToA,
         currentListOrderedByLongerTask,
         currentListOrderedByShortestTask,
+        page,
+        setPage,
       }}
     >
       {children}
