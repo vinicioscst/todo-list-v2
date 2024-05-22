@@ -1,12 +1,7 @@
-import TasksListSection from "@/components/tasks-list-section";
+import PageSection from "@/components/page-section";
 
 function TasksDeleted() {
-  return (
-    <>
-      <h1>Deleted</h1>
-      <TasksListSection listType="deleted" />
-    </>
-  );
+  return <PageSection listType="deleted" sectionName="Tasks deleted" />;
 }
 
 export default TasksDeleted;

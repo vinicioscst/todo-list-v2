@@ -10,16 +10,8 @@ interface ITaskListSection {
 }
 
 function TasksListSection({ listType }: ITaskListSection) {
-  const {
-    setCurrentList,
-    orderBy,
-    currentListOrderedByOldest,
-    currentListOrderedByLatest,
-    currentListOrderedFromAToZ,
-    currentListOrderedFromZToA,
-    currentListOrderedByLongerTask,
-    currentListOrderedByShortestTask,
-  } = useContext(PaginationContext);
+  const { setCurrentList, orderBy, paginatedList } =
+    useContext(PaginationContext);
   const { tasksToDo, tasksDone, tasksDeleted } = useContext(TasksContext);
 
   useEffect(() => {
@@ -36,23 +28,16 @@ function TasksListSection({ listType }: ITaskListSection) {
   }, [listType, setCurrentList, tasksDeleted, tasksDone, tasksToDo]);
 
   return (
-    <Box component="section">
-      <TasksList
-        listType={listType}
-        list={
-          orderBy === "A-Z"
-            ? currentListOrderedFromAToZ
-            : orderBy === "Z-A"
-            ? currentListOrderedFromZToA
-            : orderBy === "Latest"
-            ? currentListOrderedByLatest
-            : orderBy === "Oldest"
-            ? currentListOrderedByOldest
-            : orderBy === "Longer"
-            ? currentListOrderedByLongerTask
-            : currentListOrderedByShortestTask
-        }
-      />
+    <Box
+      component="section"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "1.5rem",
+        paddingTop: "1.5rem",
+      }}
+    >
+      <TasksList listType={listType} list={paginatedList} />
     </Box>
   );
 }

@@ -20,7 +20,11 @@ function ListOrderByFilter() {
   };
 
   return (
-    <FormControl variant="outlined" sx={{ minWidth: "100px", flexGrow: "1" }}>
+    <FormControl
+      variant="outlined"
+      size="small"
+      sx={{ minWidth: "100px", flexGrow: "1" }}
+    >
       <InputLabel color="secondary" htmlFor="order-by-filter">
         Order by
       </InputLabel>
