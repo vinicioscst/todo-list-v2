@@ -159,6 +159,9 @@ function TasksProvider({ children }: ITasksProvider) {
         handleTaskDone,
         handleEditTask,
         handleDeleteTask,
+        setTasksToDo,
+        setTasksDone,
+        setTasksDeleted,
       }}
     >
       {children}

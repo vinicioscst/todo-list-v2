@@ -37,6 +37,9 @@ export interface ITasksContext {
   handleTaskDone(task: ITask): void;
   handleEditTask(data: TCreateTask, taskId: string): void;
   handleDeleteTask(taskId: string): void;
+  setTasksToDo: React.Dispatch<React.SetStateAction<[] | ITask[]>>;
+  setTasksDone: React.Dispatch<React.SetStateAction<[] | ITask[]>>;
+  setTasksDeleted: React.Dispatch<React.SetStateAction<[] | ITask[]>>;
 }
 
 export interface ITasksProvider {
