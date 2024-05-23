@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import { useContext, useState } from "react";
 import Modal from "./modal";
 import { ToastContext } from "@/context/ToastContext/toast.context";
+import theme from "@/styles/theme";
 
 interface IClearListButton {
   listType: "to-do" | "done" | "deleted";
@@ -40,6 +41,7 @@ function ClearListButton({ listType }: IClearListButton) {
         color="secondary"
         startIcon={<DeleteSweep />}
         onClick={() => setIsModalOpen(true)}
+        sx={{ color: theme.palette.text.primary }}
       >
         Clear
       </Button>
