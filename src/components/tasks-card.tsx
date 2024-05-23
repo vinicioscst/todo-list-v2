@@ -64,6 +64,7 @@ function TaskCard({ task, listType }: ITaskCard) {
               variant="outlined"
               {...registerEdit("name")}
               error={!!errorsEdit.name}
+              defaultValue={task.name}
               size="small"
               color="secondary"
             />
