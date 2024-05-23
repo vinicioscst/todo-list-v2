@@ -13,8 +13,22 @@ interface IClearListButton {
 
 function ClearListButton({ listType }: IClearListButton) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { setCurrentList } = useContext(PaginationContext);
+  const { setCurrentList, paginatedList, currentList } =
+    useContext(PaginationContext);
   const { handleToast } = useContext(ToastContext);
+
+  function handleOpen() {
+    if (paginatedList.length === 0) {
+      setIsModalOpen(false);
+      handleToast({
+        message: "List is already empty",
+        severity: "error",
+        variant: "filled",
+      });
+    } else {
+      setIsModalOpen(true);
+    }
+  }
 
   function handleClear() {
     if (listType === "to-do") localStorage.removeItem("TODOLIST@TASKSTODO");
@@ -40,7 +54,7 @@ function ClearListButton({ listType }: IClearListButton) {
         variant="contained"
         color="secondary"
         startIcon={<DeleteSweep />}
-        onClick={() => setIsModalOpen(true)}
+        onClick={handleOpen}
         sx={{ color: theme.palette.text.primary }}
       >
         Clear
