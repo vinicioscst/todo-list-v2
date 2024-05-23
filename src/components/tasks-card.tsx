@@ -74,12 +74,13 @@ function TaskCard({ task, listType }: ITaskCard) {
             {task.name}
           </Typography>
         )}
-        {listType === "to-do" && !deleteMode && (
-          <Typography variant="subtitle1">
-            {formatDistance(task.createdAt, new Date(), {
-              includeSeconds: true,
-              addSuffix: true,
-            })}
+        {!deleteMode && (
+          <Typography variant="subtitle1" fontSize={12}>
+            {"Created " +
+              formatDistance(task.createdAt, new Date(), {
+                includeSeconds: true,
+                addSuffix: true,
+              })}
           </Typography>
         )}
       </Box>
